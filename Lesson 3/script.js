@@ -24,3 +24,7 @@ const getTypeFromValue = (value) => {
     return console.log("bigint");
   }
 };
+
+getTypeFromValue("hello"); // string
+getTypeFromValue(123); // number
+getTypeFromValue(true); // boolean
