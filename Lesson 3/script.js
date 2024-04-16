@@ -1,30 +1,17 @@
-const getTypeFromValue = (value) => {
-  if (typeof value === "string") {
-    return console.log("string");
+const setSpace = (value) => {
+  if (!value) {
+    return console.log("Uh oh! Please enter a number to be spaced out.");
   }
-  if (typeof value === "number") {
-    return console.log("number");
+
+  const splitNumber = value.toString().split("");
+
+  if (splitNumber.length <= 1) {
+    console.log("Uh oh! Please enter a number greater than 1 to be spaced out.");
   }
-  if (typeof value === "boolean") {
-    return console.log("boolean");
-  }
-  if (typeof value === "object") {
-    return console.log("object");
-  }
-  if (typeof value === "undefined") {
-    return console.log("undefined");
-  }
-  if (typeof value === "function") {
-    return console.log("function");
-  }
-  if (typeof value === "symbol") {
-    return console.log("symbol");
-  }
-  if (typeof value === "bigint") {
-    return console.log("bigint");
-  }
+
+  const spacedNumber = splitNumber.join(" ");
+
+  console.log(spacedNumber);
 };
 
-getTypeFromValue("hello"); // string
-getTypeFromValue(123); // number
-getTypeFromValue(true); // boolean
+setSpace(10369);
