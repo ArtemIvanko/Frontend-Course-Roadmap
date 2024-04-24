@@ -1,4 +1,4 @@
-let num = +prompt("Enter number number");
+let num = +prompt("Enter number");
 
 for (let i = 1; i <= 100; i++) {
   if (!num || num <= 0) {
