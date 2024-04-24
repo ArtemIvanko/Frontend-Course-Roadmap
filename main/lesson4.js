@@ -96,3 +96,21 @@ showUserDetails();
 //TODO: Refactor the code to use switch statement instead of if-else
 //TODO: Remove duplicated code
 //TODO: Use loop instead of hardcoding the code
+
+let numOrStr = prompt("input number or string");
+console.log(numOrStr);
+
+switch (true) {
+  case numOrStr === null:
+    console.log("ви скасували");
+    break;
+  case numOrStr === "":
+    console.log("Empty String");
+    break;
+  case isNaN(+numOrStr):
+    console.log(" number is Ba_NaN");
+    break;
+  default:
+    console.log("OK!");
+    break;
+}
