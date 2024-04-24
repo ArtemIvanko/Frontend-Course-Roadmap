@@ -1,3 +1,7 @@
+const userName = prompt("Enter your name");
+
+alert(`Hello, ${userName}! How are you?`);
+
 const number = prompt("Enter a three-digit number");
 const splitNumber = number.split("");
 let isAllEqual = true;
