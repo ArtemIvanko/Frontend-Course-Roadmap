@@ -29,7 +29,7 @@ for (let i = 1; i <= 100; i++) {
   }
 }
 
-let num = +prompt("Enter a number");
+let userNum = +prompt("Enter a number");
 let integerList = "";
 
 const getIntegerList = (num) => {
@@ -46,7 +46,7 @@ const getIntegerList = (num) => {
   return integerList;
 };
 
-getIntegerList(num);
+getIntegerList(userNum);
 
 //Возможно я с верхней частью немного не так сделал, поэтому вот второй варик, который скорее всего и есть правильный
 
