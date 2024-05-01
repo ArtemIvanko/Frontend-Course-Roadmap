@@ -1,9 +1,7 @@
 const getMultiples = (a) => {
-  let result = a;
-
   return (b) => {
-    result *= b;
-    return result;
+    a *= b;
+    return a;
   };
 };
 
