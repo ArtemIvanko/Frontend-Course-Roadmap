@@ -1,3 +1,14 @@
+let user = {
+  name : "Artem",
+  age : 22,
+  city : "Poltava",
+  showInfo : function () {
+    return `Name: ${this.name}, Age: ${this.age}, City: ${this.city}`;
+  },
+};
+
+console.log(user.showInfo());
+
 let contacts = {
   contactsList : [
     {
@@ -32,4 +43,3 @@ contacts.addContact = function (name, phone, email) {
 };
 
 console.log(contacts.searchContact("John"));
-
