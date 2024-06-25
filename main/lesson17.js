@@ -1,24 +1,17 @@
-class Calculator {
-  add(a, b) {
-    return a + b;
+class Coach {
+  constructor(name, specialization, rating) {
+    this.name = name;
+    this.specialization = specialization;
+    this.rating = rating;
   }
 
-  subtract(a, b) {
-    return a - b;
-  }
-
-  multiply(a, b) {
-    return a * b;
-  }
-
-  divide(a, b) {
-    return a / b;
+  displayInfo() {
+    console.log(`Coach: ${this.name}, Specialization: ${this.specialization}, Rating: ${this.rating}`);
   }
 }
 
-const calc = new Calculator();
+const coach1 = new Coach("John Doe", "Fitness", 4.7);
+const coach2 = new Coach("Alice Smith", "Yoga", 4.9);
 
-console.log(calc.add(5, 3));
-console.log(calc.subtract(10, 4));
-console.log(calc.multiply(3, 6));
-console.log(calc.divide(8, 2));
+coach1.displayInfo();
+coach2.displayInfo();
