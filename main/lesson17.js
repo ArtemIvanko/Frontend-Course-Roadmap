@@ -1,24 +1,29 @@
-class Calculator {
-  add(a, b) {
-    return a + b;
+class BankAccount {
+  constructor(balance) {
+    this.balance = balance;
   }
 
-  subtract(a, b) {
-    return a - b;
+  deposit(amount) {
+    this.balance += amount;
   }
 
-  multiply(a, b) {
-    return a * b;
+  withdraw(amount) {
+    this.balance -= amount;
   }
 
-  divide(a, b) {
-    return a / b;
+  getBalance() {
+    return this.balance;
   }
 }
 
-const calc = new Calculator();
+const account1 = new BankAccount(1000);
 
-console.log(calc.add(5, 3));
-console.log(calc.subtract(10, 4));
-console.log(calc.multiply(3, 6));
-console.log(calc.divide(8, 2));
+console.log(account1.getBalance());
+
+account1.deposit(500);
+
+console.log(account1.getBalance());
+
+account1.withdraw(200);
+
+console.log(account1.getBalance());
