@@ -12,14 +12,13 @@ button.onclick = function () {
   .then(response => response.json())
   .then(data => {
     weather.innerHTML = `
-                <div>Location: ${data.name}</div>
-                <div>Temperature: ${(data.main.temp - 273.15).toFixed(2)}°C</div>
-                <div>Weather: ${data.weather[0].description}</div>
-            `;
+      <div>Temperature: ${data.main.temp}</div>
+      <div>Pressure: ${data.main.pressure}</div>
+      <div>Humidity: ${data.main.humidity}</div>
+      <div>Wind speed: ${data.wind.speed}</div>
+    `;
   })
   .catch(error => {
     weather.innerHTML = `<div>Error fetching weather data: ${error.message}</div>`;
   });
 };
-
-button.onclick();
