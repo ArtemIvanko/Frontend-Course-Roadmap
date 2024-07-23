@@ -1,44 +1,62 @@
 const Todo = require("../models/Todo");
 
-exports.createTodo = async (req, res) => {
-  try {
-    const newTodo = new Todo({
-      title : req.body.title,
-    });
-    const todo = await newTodo.save();
-    res.json(todo);
-  } catch (err) {
-    res.status(500).send("Server error");
-  }
-};
-
 exports.getTodos = async (req, res) => {
   try {
     const todos = await Todo.find();
     res.json(todos);
   } catch (err) {
-    res.status(500).send("Server error");
+    res.status(500).json({ message : err.message });
+  }
+};
+
+exports.createTodo = async (req, res) => {
+  const { title } = req.body;
+  const newTodo = new Todo({
+    title,
+    completed : false,
+  });
+
+  try {
+    const savedTodo = await newTodo.save();
+    res.status(201).json(savedTodo);
+  } catch (err) {
+    res.status(400).json({ message : err.message });
   }
 };
 
 exports.updateTodo = async (req, res) => {
+  const { id } = req.params;
+  const { title, completed } = req.body;
+
   try {
-    const todo = await Todo.findByIdAndUpdate(
-      req.params.id,
-      { title : req.body.title, completed : req.body.completed },
+    const updatedTodo = await Todo.findByIdAndUpdate(
+      id,
+      { title, completed },
       { new : true },
     );
-    res.json(todo);
+
+    if (!updatedTodo) {
+      return res.status(404).json({ message : "Todo not found" });
+    }
+
+    res.json(updatedTodo);
   } catch (err) {
-    res.status(500).send("Server error");
+    res.status(400).json({ message : err.message });
   }
 };
 
 exports.deleteTodo = async (req, res) => {
+  const { id } = req.params;
+
   try {
-    await Todo.findByIdAndDelete(req.params.id);
-    res.json({ msg : "Todo removed" });
+    const deletedTodo = await Todo.findByIdAndDelete(id);  // Використовуємо findByIdAndDelete
+
+    if (!deletedTodo) {
+      return res.status(404).json({ message : "Todo not found" });
+    }
+
+    res.json({ message : "Todo deleted" });
   } catch (err) {
-    res.status(500).send("Server error");
+    res.status(500).json({ message : err.message });
   }
 };
