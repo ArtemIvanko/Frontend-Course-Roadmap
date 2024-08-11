@@ -1,19 +1,12 @@
-import { combineReducers, createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import swapiReducer from "./swapiSlice";
+import todosReducer from "./todosSlice";
+import { thunk } from "redux-thunk";
 
-const todosInitialState = {
-  todos : [],
-};
-
-const addTodo = (state = todosInitialState, action) => {
-  switch (action.type) {
-    case "ADD_TODO":
-      return {
-        ...state,
-        todos : [...state.todos, action.payload],
-      };
-    default:
-      return state;
-  }
-};
-
-export const store = createStore(combineReducers({ todos : addTodo }));
+export const store = configureStore({
+  reducer : {
+    swapi : swapiReducer,
+    todos : todosReducer,
+  },
+  middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+});
