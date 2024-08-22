@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "./todosSlice";
 
 const FieldText = ({ value, onChange }) => {
   return (
@@ -22,18 +23,18 @@ export const TodoList = () => {
     setInputValue(e.target.value);
   };
 
-  const addTodo = () => {
+  const handleAddTodo = () => {
     if (inputValue.trim()) {
-      dispatch({ type : "ADD_TODO", payload : inputValue });
+      dispatch(addTodo(inputValue));
       setInputValue("");
     }
   };
 
   return (
     <div>
-      <h1>Redux Todo List</h1>
+      <h2>Redux Todo List</h2>
       <FieldText value={inputValue} onChange={handleInputChange}/>
-      <AddButton onClick={addTodo}/>
+      <AddButton onClick={handleAddTodo}/>
       <ul>
         {todos.map((todo, index) => (
           <li key={index}>{todo}</li>
