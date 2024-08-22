@@ -1,46 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTodosRequest, addTodo, removeTodo } from "./actions";
+import { addTodo } from "./todosSlice";
+
+const FieldText = ({ value, onChange }) => {
+  return (
+    <input type="text" value={value} onChange={onChange}/>
+  );
+};
+
+const AddButton = ({ onClick }) => {
+  return (
+    <button onClick={onClick}>Add</button>
+  );
+};
 
 export const TodoList = () => {
+  const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
-  const { todos, loading, error } = useSelector((state) => state.sagaTodos);
-  const [newTodo, setNewTodo] = useState("");
+  const todos = useSelector((state) => state.todos.todos);
 
-  useEffect(() => {
-    dispatch(fetchTodosRequest());
-  }, [dispatch]);
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   const handleAddTodo = () => {
-    if (newTodo.trim()) {
-      dispatch(addTodo({ id : Date.now(), title : newTodo }));
-      setNewTodo("");
+    if (inputValue.trim()) {
+      dispatch(addTodo(inputValue));
+      setInputValue("");
     }
   };
 
-  const handleRemoveTodo = (id) => {
-    dispatch(removeTodo(id));
-  };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
   return (
     <div>
-      <h1>Todo List</h1>
-      <input
-        type="text"
-        value={newTodo}
-        onChange={(e) => setNewTodo(e.target.value)}
-        placeholder="Add a new todo"
-      />
-      <button onClick={handleAddTodo}>Add Todo</button>
+      <h2>Redux Todo List</h2>
+      <FieldText value={inputValue} onChange={handleInputChange}/>
+      <AddButton onClick={handleAddTodo}/>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.title}
-            <button onClick={() => handleRemoveTodo(todo.id)}>Remove</button>
-          </li>
+        {todos.map((todo, index) => (
+          <li key={index}>{todo}</li>
         ))}
       </ul>
     </div>
