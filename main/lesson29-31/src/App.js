@@ -1,11 +1,9 @@
 import { Provider } from "react-redux";
 import { store } from "./store";
-import { TodoList } from "./TodoList";
-import { Counter } from "./Counter";
+import { SwapiComponent } from "./SwapiComponent";
 
 export const App = () => (
   <Provider store={store}>
-    <TodoList/>
-    <Counter/>
+    <SwapiComponent/>
   </Provider>
 );
