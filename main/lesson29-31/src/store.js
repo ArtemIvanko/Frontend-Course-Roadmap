@@ -1,7 +1,23 @@
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
+
+const todosInitialState = {
+  todos : [],
+};
 
 const initialState = {
   count : 0,
+};
+
+const addTodo = (state = todosInitialState, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return {
+        ...state,
+        todos : [...state.todos, action.payload],
+      };
+    default:
+      return state;
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,4 +35,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export const store = createStore(reducer);
+export const store = createStore(combineReducers({ todos : addTodo, reducer }));
