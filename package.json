@@ -27,6 +27,8 @@
   },
   "scripts": {
     "start": "node main/server.js",
-    "dev": "nodemon main/server.js"
+    "dev": "nodemon main/server.js",
+    "build": "webpack --mode production",
+    "start:nodemon": "nodemon main/notes/lesson23.js"
   }
 }
