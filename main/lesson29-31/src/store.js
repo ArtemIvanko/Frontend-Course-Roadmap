@@ -1,20 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
 import swapiReducer from "./swapiSlice";
 import todosReducer from "./todosSlice";
+import rootSaga from "./sagas";
 import { thunk } from "redux-thunk";
+import { sagaTodosReducer } from "./sagaTodoReducer";
 
-export const store = configureStore({
-  reducer : {
-    swapi : swapiReducer,
-    todos : todosReducer,
-  },
-  middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
-});
+// import { combineReducers, createStore } from "redux";
 
-const initialState = {
-  count : 0,
-};
-
+// const todosInitialState = {
+//   todos : [],
+// };
+//
+// const initialState = {
+//   count : 0,
+// };
+//
 // const addTodo = (state = todosInitialState, action) => {
 //   switch (action.type) {
 //     case "ADD_TODO":
@@ -43,3 +44,16 @@ const initialState = {
 // };
 //
 // export const store = createStore(combineReducers({ todos : addTodo, reducer }));
+
+const sagaMiddleware = createSagaMiddleware();
+
+export const store = configureStore({
+  reducer : {
+    swapi : swapiReducer,
+    todos : todosReducer,
+    sagaTodos : sagaTodosReducer,
+  },
+  middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk, sagaMiddleware),
+});
+
+sagaMiddleware.run(rootSaga);
