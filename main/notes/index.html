@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  const response = async () => {
+    return fetch("http://localhost:3000/todos", {
+      method : "POST",
+      headers : {
+        "Content-Type" : "application/json",
+      },
+      body : JSON.stringify(
+        { title : "Learn React", completed : false }),
+    });
+  };
+
+  response();
+</script>
+</body>
+</html>
